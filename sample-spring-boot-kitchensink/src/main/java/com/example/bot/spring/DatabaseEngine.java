@@ -34,7 +34,7 @@ public class DatabaseEngine {
 			br = new BufferedReader(isr);
 			String sCurrentLine;
 			
-			while (result != null && (sCurrentLine = br.readLine()) != null) {
+			while (text != null && (sCurrentLine = br.readLine()) != null) {
 				String[] parts = sCurrentLine.split(":");
 				if (text.toLowerCase().equals(parts[0].toLowerCase())) {
 					result = parts[1];
@@ -54,6 +54,7 @@ public class DatabaseEngine {
 		}
 		if (result != null)
 			return result;
+		
 		throw new Exception("NOT FOUND");
     }
 	
