@@ -299,7 +299,7 @@ public class KitchenSinkController {
 		itscLOGIN = System.getenv("ITSC_LOGIN");
 	}
 
-	private SQLDatabaseEngine database;
+	private DatabaseEngine database;
 	private String itscLOGIN;
 	
 
