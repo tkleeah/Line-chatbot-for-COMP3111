@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.net.URISyntaxException;
+import java.io.IOException;
 import java.net.URI;
 
 @Slf4j
@@ -12,7 +13,36 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 	@Override
 	String search(String text) throws Exception {
 		//Write your code here
-		return null;
+		
+		String result = null;
+		
+		try {
+			PreparedStatement stmt = getConnection().prepareStatement(
+			"SELECT * FROM lab3");
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			
+			while (rs.next()) {
+				if (text.equals(rs.getString(1)))
+					result = rs.getString(2);
+			}
+			
+			rs.close();
+			stmt.close();
+			getConnection().close();
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+
+		
+		if (result != null)
+			return result;
+		
+		throw new Exception("NOT FOUND");
+		
+		
 	}
 	
 	
@@ -31,5 +61,9 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 
 		return connection;
 	}
-
+	
+	
+	
+	
+	
 }
